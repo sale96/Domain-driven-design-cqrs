@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DDDT.Application\DDDT.Application.csproj" />
+    <ProjectReference Include="..\DDDT.DataAccess\DDDT.EfDataAccess.csproj" />
+    <ProjectReference Include="..\DDDT.Domain\DDDT.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
