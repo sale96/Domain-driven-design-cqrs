@@ -1,4 +1,5 @@
 ﻿using DDDT.Application.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -43,6 +44,18 @@ namespace DDDT.API.Core
                         response = new
                         {
                             message = "Resource not found."
+                        };
+                        break;
+                    case ValidationException validationException:
+                        statusCode = StatusCodes.Status422UnprocessableEntity;
+                        response = new
+                        {
+                            message = "Failed due to validation errors.",
+                            errors = validationException.Errors.Select(x => new
+                            {
+                                x.PropertyName,
+                                x.ErrorMessage
+                            })
                         };
                         break;
                 }
