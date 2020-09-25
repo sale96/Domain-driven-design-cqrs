@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DDDT.Application;
 using DDDT.Application.Commands;
 using DDDT.Application.DataTransfer;
 using DDDT.Application.Exceptions;
@@ -15,6 +16,13 @@ namespace DDDT.API.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        private readonly UseCaseExecutor _executor;
+
+        public TestController(UseCaseExecutor executor)
+        {
+            _executor = executor;
+        }
+
         // GET: api/<TestController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -31,11 +39,23 @@ namespace DDDT.API.Controllers
 
         // POST api/<TestController>
         [HttpPost]
-        public void Post(
+        public IActionResult Post(
             [FromBody] GroupDto dto,
             [FromServices] ICreateGroupCommand command)
         {
-            command.Execute(dto);
+            try
+            {
+                _executor.ExecuteCommand<GroupDto>(command, dto);
+                return NoContent();
+            }
+            catch (UnauthorizedUseCaseException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch(EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT api/<TestController>/5
@@ -56,6 +76,10 @@ namespace DDDT.API.Controllers
             catch(EntityNotFoundException ex)
             {
                 return NotFound();
+            }
+            catch(UnauthorizedUseCaseException ex)
+            {
+                return Unauthorized(ex.Message);
             }
         }
     }
