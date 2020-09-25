@@ -17,14 +17,9 @@ namespace DDDT.Implementation.Commands
             _context = context;
         }
 
-        public EfDeleteGroupCommand()
-        {
-
-        }
-
         public int Id => 3;
 
-        public string Name => "Deleting group";
+        public string Name => "Deleting group command using ef.";
 
         public void Execute(int request)
         {
