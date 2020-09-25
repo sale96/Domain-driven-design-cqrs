@@ -33,6 +33,7 @@ namespace DDDT.API
             services.AddTransient<ICreateGroupCommand, EfCreateGroupCommand>();
             services.AddTransient<IDeleteGroupCommand, EfDeleteGroupCommand>();
             services.AddTransient<IApplicationActor, FakeApiActor>();
+            services.AddTransient<UseCaseExecutor>();
             services.AddControllers();
         }
 
