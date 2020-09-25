@@ -33,6 +33,7 @@ namespace DDDT.API
             services.AddTransient<DDDTContext>();
 
             services.RegisterCommands();
+            services.RegisterValidators();
 
             services.AddTransient<IApplicationActor, FakeApiActor>();
             services.AddTransient<UseCaseExecutor>();
