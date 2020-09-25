@@ -43,19 +43,8 @@ namespace DDDT.API.Controllers
             [FromBody] GroupDto dto,
             [FromServices] ICreateGroupCommand command)
         {
-            try
-            {
-                _executor.ExecuteCommand<GroupDto>(command, dto);
-                return NoContent();
-            }
-            catch (UnauthorizedUseCaseException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-            catch(EntityNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            _executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
         // PUT api/<TestController>/5
@@ -68,19 +57,8 @@ namespace DDDT.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteGroupCommand command)
         {
-            try
-            {
-                command.Execute(id);
-                return NoContent();
-            }
-            catch(EntityNotFoundException ex)
-            {
-                return NotFound();
-            }
-            catch(UnauthorizedUseCaseException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
+            _executor.ExecuteCommand(command, id);
+            return NoContent();
         }
     }
 }

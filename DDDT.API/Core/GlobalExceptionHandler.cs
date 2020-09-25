@@ -38,6 +38,13 @@ namespace DDDT.API.Core
                             message = "You are not allowed to execute that operation."
                         };
                         break;
+                    case EntityNotFoundException _:
+                        statusCode = StatusCodes.Status404NotFound;
+                        response = new
+                        {
+                            message = "Resource not found."
+                        };
+                        break;
                 }
 
                 httpContext.Response.StatusCode = statusCode;
