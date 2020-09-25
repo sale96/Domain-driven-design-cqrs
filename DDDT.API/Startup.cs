@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DDDT.API.Core;
+using DDDT.Application;
 using DDDT.Application.Commands;
 using DDDT.EfDataAccess;
 using DDDT.Implementation.Commands;
@@ -30,6 +32,7 @@ namespace DDDT.API
             services.AddTransient<DDDTContext>();
             services.AddTransient<ICreateGroupCommand, EfCreateGroupCommand>();
             services.AddTransient<IDeleteGroupCommand, EfDeleteGroupCommand>();
+            services.AddTransient<IApplicationActor, FakeApiActor>();
             services.AddControllers();
         }
 
