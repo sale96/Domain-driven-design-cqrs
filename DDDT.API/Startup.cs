@@ -49,6 +49,8 @@ namespace DDDT.API
 
             app.UseRouting();
 
+            app.UseMiddleware<GlobalExceptionHandler>();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
