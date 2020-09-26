@@ -14,11 +14,11 @@ namespace DDDT.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class GroupsController : ControllerBase
     {
         private readonly UseCaseExecutor _executor;
 
-        public TestController(UseCaseExecutor executor)
+        public GroupsController(UseCaseExecutor executor)
         {
             _executor = executor;
         }
