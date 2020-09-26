@@ -58,6 +58,13 @@ namespace DDDT.API.Core
                             })
                         };
                         break;
+                    default:
+                        statusCode = StatusCodes.Status500InternalServerError;
+                        response = new
+                        {
+                            message = ex.Message
+                        };
+                        break;
                 }
 
                 httpContext.Response.StatusCode = statusCode;
