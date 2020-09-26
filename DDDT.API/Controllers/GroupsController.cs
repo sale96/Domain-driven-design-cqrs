@@ -6,6 +6,8 @@ using DDDT.Application;
 using DDDT.Application.Commands;
 using DDDT.Application.DataTransfer;
 using DDDT.Application.Exceptions;
+using DDDT.Application.Queries;
+using DDDT.Application.Searches;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,9 +27,11 @@ namespace DDDT.API.Controllers
 
         // GET: api/<TestController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get(
+            [FromQuery] GroupSearch search,
+            [FromServices] IGetGroupsQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(query.Excute(search));
         }
 
         // GET api/<TestController>/5
