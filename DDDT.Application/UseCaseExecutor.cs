@@ -27,7 +27,7 @@ namespace DDDT.Application
             if (!_actor.AllowedUseCases.Contains(query.Id))
                 throw new UnauthorizedUseCaseException(query, _actor);
 
-            return query.Excute(search);
+            return query.Execute(search);
         }
 
         public void ExecuteCommand<TRequest>(
