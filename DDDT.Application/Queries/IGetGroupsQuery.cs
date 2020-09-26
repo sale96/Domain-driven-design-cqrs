@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DDDT.Application.Queries
 {
-    public interface IGetGroupsQuery : IQuery<GroupSearch, IEnumerable<GroupDto>>
+    public interface IGetGroupsQuery : IQuery<GroupSearch, PagedResponse<GroupDto>>
     {
     }
 }

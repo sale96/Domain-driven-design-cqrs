@@ -6,6 +6,6 @@ namespace DDDT.Application
 {
     public interface IQuery<TSearch, TResult> : IUseCase
     {
-        TResult Excute(TSearch search);
+        TResult Execute(TSearch search);
     }
 }

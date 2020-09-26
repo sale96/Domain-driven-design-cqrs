@@ -21,7 +21,7 @@ namespace DDDT.Implementation.Queries
 
         public string Name => "Group search";
 
-        public IEnumerable<GroupDto> Excute(GroupSearch search)
+        public PagedResponse<GroupDto> Execute(GroupSearch search)
         {
             var query = _context.Groups.AsQueryable();
 
@@ -30,11 +30,17 @@ namespace DDDT.Implementation.Queries
                 query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
             }
 
-            return query.Select(x => new GroupDto
+            var skipCount = search.PerPage * (search.Page - 1);
+
+            var response = new PagedResponse<GroupDto>
             {
-                Id = x.Id,
-                Name = x.Name
-            }).ToList();
+                CurrentPage = search.Page,
+                ItemsPerPage = search.PerPage,
+                TotalCount = query.Count(),
+                Items = query.Skip(skipCount).Take(search.PerPage).Select(x => new GroupDto { Id = x.Id, Name = x.Name}).ToList()
+            };
+
+            return response;
         }
     }
 }

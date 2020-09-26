@@ -8,6 +8,7 @@ using DDDT.Application;
 using DDDT.Application.Commands;
 using DDDT.EfDataAccess;
 using DDDT.Implementation.Commands;
+using DDDT.Implementation.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,8 @@ namespace DDDT.API
             services.RegisterCommands();
             services.RegisterQueries();
             services.RegisterValidators();
+
+            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
 
             services.AddTransient<IApplicationActor, FakeApiActor>();
             services.AddTransient<UseCaseExecutor>();

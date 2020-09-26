@@ -22,7 +22,7 @@ namespace DDDT.Application
             IQuery<TSearch, TResult> query,
             TSearch search)
         {
-            _logger.Log(query, _actor);
+            _logger.Log(query, _actor, search);
 
             if (!_actor.AllowedUseCases.Contains(query.Id))
                 throw new UnauthorizedUseCaseException(query, _actor);
@@ -34,7 +34,7 @@ namespace DDDT.Application
             ICommand<TRequest> command,
             TRequest request)
         {
-            _logger.Log(command, _actor);
+            _logger.Log(command, _actor, request);
 
             if (!_actor.AllowedUseCases.Contains(command.Id))
                 throw new UnauthorizedUseCaseException(command, _actor);
