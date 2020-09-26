@@ -31,7 +31,7 @@ namespace DDDT.API.Controllers
             [FromQuery] GroupSearch search,
             [FromServices] IGetGroupsQuery query)
         {
-            return Ok(query.Excute(search));
+            return Ok(_executor.ExecuteQuery(query, search));
         }
 
         // GET api/<TestController>/5

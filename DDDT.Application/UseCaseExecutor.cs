@@ -16,6 +16,18 @@ namespace DDDT.Application
             _actor = actor;
         }
 
+        public TResult ExecuteQuery<TSearch, TResult>(
+            IQuery<TSearch, TResult> query,
+            TSearch search)
+        {
+            Console.WriteLine($"{DateTime.Now}: {_actor.Identity} is trying to execute {query.Name} using data: {JsonConvert.SerializeObject(search)}");
+
+            if (!_actor.AllowedUseCases.Contains(query.Id))
+                throw new UnauthorizedUseCaseException(query, _actor);
+
+            return query.Excute(search);
+        }
+
         public void ExecuteCommand<TRequest>(
             ICommand<TRequest> command,
             TRequest request)
