@@ -10,17 +10,19 @@ namespace DDDT.Application
     public class UseCaseExecutor
     {
         private readonly IApplicationActor _actor;
+        private readonly IUseCaseLogger _logger;
 
-        public UseCaseExecutor(IApplicationActor actor)
+        public UseCaseExecutor(IApplicationActor actor, IUseCaseLogger logger)
         {
             _actor = actor;
+            _logger = logger;
         }
 
         public TResult ExecuteQuery<TSearch, TResult>(
             IQuery<TSearch, TResult> query,
             TSearch search)
         {
-            Console.WriteLine($"{DateTime.Now}: {_actor.Identity} is trying to execute {query.Name} using data: {JsonConvert.SerializeObject(search)}");
+            _logger.Log(query, _actor);
 
             if (!_actor.AllowedUseCases.Contains(query.Id))
                 throw new UnauthorizedUseCaseException(query, _actor);
@@ -32,7 +34,7 @@ namespace DDDT.Application
             ICommand<TRequest> command,
             TRequest request)
         {
-            Console.WriteLine($"{DateTime.Now}: {_actor.Identity} is trying to execute {command.Name} using data: {JsonConvert.SerializeObject(request)}");
+            _logger.Log(command, _actor);
 
             if (!_actor.AllowedUseCases.Contains(command.Id))
                 throw new UnauthorizedUseCaseException(command, _actor);
