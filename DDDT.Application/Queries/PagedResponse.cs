@@ -10,7 +10,7 @@ namespace DDDT.Application.Queries
         public int CurrentPage { get; set; }
         public int ItemsPerPage { get; set; }
 
-        public int PagesCount => TotalCount / ItemsPerPage;
+        public int PagesCount => (int) Math.Ceiling((float) TotalCount / ItemsPerPage);
         public IEnumerable<T> Items { get; set; }
     }
 }
