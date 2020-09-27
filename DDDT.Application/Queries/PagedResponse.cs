@@ -9,6 +9,8 @@ namespace DDDT.Application.Queries
         public int TotalCount { get; set; }
         public int CurrentPage { get; set; }
         public int ItemsPerPage { get; set; }
+
+        public int PagesCount => TotalCount / ItemsPerPage;
         public IEnumerable<T> Items { get; set; }
     }
 }
