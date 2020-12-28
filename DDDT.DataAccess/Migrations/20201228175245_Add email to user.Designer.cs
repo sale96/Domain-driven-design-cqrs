@@ -3,14 +3,16 @@ using DDDT.EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DDDT.EfDataAccess.Migrations
 {
     [DbContext(typeof(DDDTContext))]
-    partial class DDDTContextModelSnapshot : ModelSnapshot
+    [Migration("20201228175245_Add email to user")]
+    partial class Addemailtouser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

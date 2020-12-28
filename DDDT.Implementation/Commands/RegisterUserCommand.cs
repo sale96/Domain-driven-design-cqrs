@@ -2,6 +2,7 @@
 using DDDT.Application.DataTransfer;
 using DDDT.EfDataAccess;
 using DDDT.Implementation.Validators;
+using FluentValidation;
 
 namespace DDDT.Implementation.Commands
 {
@@ -21,7 +22,15 @@ namespace DDDT.Implementation.Commands
 
         public void Execute(RegisterUserDto request)
         {
+            _validator.ValidateAndThrow(request);
 
+            _context.Users.Add(new Domain.User
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Username = request.Username,
+                Password = request.Password
+            });
         }
     }
 }
