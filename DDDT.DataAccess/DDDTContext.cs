@@ -16,5 +16,7 @@ namespace DDDT.EfDataAccess
         }
 
         public DbSet<Group> Groups { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserUseCase> UserUseCases { get; set; }
     }
 }
