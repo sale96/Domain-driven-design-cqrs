@@ -58,7 +58,7 @@ namespace DDDT.API
                 var user = accessor.HttpContext.User;
 
                 if (user.FindFirst("ActorData") == null)
-                    throw new InvalidOperationException("Actor data doesn't exist in token");
+                    return new AnonymusActor();
 
                 var actorString = user.FindFirst("ActorData").Value;
 
