@@ -22,7 +22,7 @@ namespace DDDT.API.Controllers
 
         // POST api/<TokenController>
         [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        public IActionResult Post()
         {
             return Ok(new
             {

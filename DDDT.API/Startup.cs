@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DDDT.API.Core;
 using DDDT.API.Services;
@@ -9,6 +10,7 @@ using DDDT.Application.Commands;
 using DDDT.EfDataAccess;
 using DDDT.Implementation.Commands;
 using DDDT.Implementation.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DDDT.API
 {
@@ -43,6 +46,31 @@ namespace DDDT.API
             services.AddTransient<UseCaseExecutor>();
 
             services.AddTransient<JwtManager>();
+
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "asp_api",
+                    ValidateIssuer = true,
+                    ValidAudience = "Any",
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsAVerySecretKey")),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+
             services.AddControllers();
         }
 
@@ -58,6 +86,7 @@ namespace DDDT.API
 
             app.UseMiddleware<GlobalExceptionHandler>();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
