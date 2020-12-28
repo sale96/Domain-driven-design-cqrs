@@ -1,4 +1,5 @@
 ﻿using DDDT.API.Core;
+using DDDT.API.Requests;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,16 @@ namespace DDDT.API.Controllers
 
         // POST api/<TokenController>
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody] LoginRequest request)
         {
+            var token = _manager.MakeToken(request.Username, request.Password);
+
+            if (token == null)
+                return Unauthorized();
+
             return Ok(new
             {
-                token = _manager.MakeToken("", "")
+                token = token
             });
         }
     }
