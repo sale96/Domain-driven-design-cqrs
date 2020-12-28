@@ -12,6 +12,7 @@ namespace DDDT.API.Services
         public static IServiceCollection RegisterValidators(this IServiceCollection services)
         {
             services.AddTransient<CreateGroupValidator>();
+            services.AddTransient<RegisterUserValidator>();
 
             return services;
         }

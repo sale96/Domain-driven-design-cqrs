@@ -94,7 +94,6 @@ namespace DDDT.API
                 };
             });
 
-
             services.AddControllers();
         }
 

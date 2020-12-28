@@ -1,10 +1,6 @@
 ﻿using DDDT.Application.Commands;
 using DDDT.Implementation.Commands;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DDDT.API.Services
 {
@@ -14,6 +10,7 @@ namespace DDDT.API.Services
         {
             services.AddTransient<ICreateGroupCommand, EfCreateGroupCommand>();
             services.AddTransient<IDeleteGroupCommand, EfDeleteGroupCommand>();
+            services.AddTransient<IRegisterUserCommand, RegisterUserCommand>();
 
             return services;
         }
