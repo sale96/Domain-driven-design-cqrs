@@ -41,6 +41,8 @@ namespace DDDT.API
 
             services.AddTransient<IApplicationActor, FakeApiActor>();
             services.AddTransient<UseCaseExecutor>();
+
+            services.AddTransient<JwtManager>();
             services.AddControllers();
         }
 
