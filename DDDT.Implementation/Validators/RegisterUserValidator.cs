@@ -23,7 +23,7 @@ namespace DDDT.Implementation.Validators
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .MinimumLength(7)
+                .EmailAddress()
                 .Must(x => !context.Users.Any(user => user.Email == x))
                 .WithMessage("User with that email allready exist");
         }

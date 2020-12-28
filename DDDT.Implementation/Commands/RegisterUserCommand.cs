@@ -29,8 +29,11 @@ namespace DDDT.Implementation.Commands
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Username = request.Username,
-                Password = request.Password
+                Password = request.Password,
+                Email = request.Email
             });
+
+            _context.SaveChanges();
         }
     }
 }

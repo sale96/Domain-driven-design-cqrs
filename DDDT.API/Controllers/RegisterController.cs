@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DDDT.Application;
+using DDDT.Application.DataTransfer;
+using DDDT.Implementation.Commands;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +15,20 @@ namespace DDDT.API.Controllers
     [ApiController]
     public class RegisterController : ControllerBase
     {
+        private readonly RegisterUserCommand _command;
+        private readonly UseCaseExecutor _executor;
+
+        public RegisterController(UseCaseExecutor executor, RegisterUserCommand command)
+        {
+            _executor = executor;
+            _command = command;
+        }
+
         // POST api/<RegisterController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] RegisterUserDto dto)
         {
-
+            _executor.ExecuteCommand(_command, dto);
         }
     }
 }
