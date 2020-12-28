@@ -20,6 +20,12 @@ namespace DDDT.Implementation.Validators
                 .MinimumLength(4)
                 .Must(x => !context.Users.Any(user => user.Username == x))
                 .WithMessage("Username is already taken.");
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .MinimumLength(7)
+                .Must(x => !context.Users.Any(user => user.Email == x))
+                .WithMessage("User with that email allready exist");
         }
     }
 }
