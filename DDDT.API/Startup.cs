@@ -13,12 +13,14 @@ using DDDT.Implementation.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace DDDT.API
 {
@@ -42,7 +44,29 @@ namespace DDDT.API
 
             services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
 
-            services.AddTransient<IApplicationActor, FakeApiActor>();
+            services.AddHttpContextAccessor();
+
+            // Setup application actor/user from jwt token
+            services.AddTransient<IApplicationActor>(x =>
+            {
+                var accessor = x.GetService<IHttpContextAccessor>();
+                // Get the authentication token
+                // Get the payload from the token
+                // Get the ActorData claim
+                // Deserialize to c# object
+
+                var user = accessor.HttpContext.User;
+
+                if (user.FindFirst("ActorData") == null)
+                    throw new InvalidOperationException("Actor data doesn't exist in token");
+
+                var actorString = user.FindFirst("ActorData").Value;
+
+                var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
+
+                return actor;
+            });
+
             services.AddTransient<UseCaseExecutor>();
 
             services.AddTransient<JwtManager>();
