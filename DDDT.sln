@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDT.Domain", "DDDT.Domain\DDDT.Domain.csproj", "{EF917CE7-061A-4061-BD5A-E322ABE853AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDT.Domain", "DDDT.Domain\DDDT.Domain.csproj", "{EF917CE7-061A-4061-BD5A-E322ABE853AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDT.Application", "DDDT.Application\DDDT.Application.csproj", "{3CC33F8C-D996-4B4E-8BBF-E6648DEE0456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDT.Application", "DDDT.Application\DDDT.Application.csproj", "{3CC33F8C-D996-4B4E-8BBF-E6648DEE0456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDT.Implementation", "DDDT.Implementation\DDDT.Implementation.csproj", "{919C2478-227F-42AF-99B6-44F30D10A2D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDT.Implementation", "DDDT.Implementation\DDDT.Implementation.csproj", "{919C2478-227F-42AF-99B6-44F30D10A2D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDT.EfDataAccess", "DDDT.DataAccess\DDDT.EfDataAccess.csproj", "{858B3CB6-A875-4833-92FF-29317D663CEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDT.EfDataAccess", "DDDT.DataAccess\DDDT.EfDataAccess.csproj", "{858B3CB6-A875-4833-92FF-29317D663CEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDT.API", "DDDT.API\DDDT.API.csproj", "{B5918F24-C795-4764-BE80-FC919C84FFCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDT.API", "DDDT.API\DDDT.API.csproj", "{B5918F24-C795-4764-BE80-FC919C84FFCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
